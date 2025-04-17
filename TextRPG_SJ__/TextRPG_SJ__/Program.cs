@@ -25,13 +25,20 @@ namespace TextRPG_SJ__
 
         public int lv = 1;
         string job = "전사";
+        int baseAtk = 10;
+        int baseDef = 5;
         public int atk = 10;
         public int def = 5;
         public int hp = 100;
         public int gold = 50000;
+        
 
         ItemManager itemManager;
         Item item;
+
+        
+
+
 
         public GameLogic()
         {
@@ -79,9 +86,8 @@ namespace TextRPG_SJ__
         private void PlayerStat()
         {
             Console.WriteLine("상태 보기\n캐릭터의 정보가 표시됩니다.\n");
-            Console.WriteLine($"Lv. {lv.ToString("D2")}\nChad ( {job} )\n공격력 : {atk}\n방어력 : {def}\n체력 : {hp}\nGold : {gold} G\n");
+            Console.WriteLine($"Lv. {lv.ToString("D2")}\nChad ( {job} )\n공격력 : {atk} (+{atk-baseAtk})\n방어력 : {def} (+{def-baseDef})\n체력 : {hp}\nGold : {gold} G\n");
             Console.Write("0. 나가기\n\n원하시는 행동을 입력해주세요.\n>>");
-
             int select = int.Parse(Console.ReadLine());
             if (select == 0)
             {
@@ -105,7 +111,7 @@ namespace TextRPG_SJ__
 
         public List<Item> myItem = new List<Item>();
         Item item;
-
+        
         public void MyItemInfo()
         {
 
@@ -136,7 +142,7 @@ namespace TextRPG_SJ__
             }
         }
 
-        private void Equip()
+        public void Equip()
         {
             Console.WriteLine("인벤토리 - 장착관리\n보유중인 아이템을 관리할 수 있습니다.\n\n[아이템 목록]");
             int idx = 1;
@@ -169,9 +175,15 @@ namespace TextRPG_SJ__
                     selectedItem.IsEquip = false;
 
                     if (selectedItem.StatName == "공격력")
+                    {
                         gameLogic.atk -= selectedItem.Stat;
+                        
+                    }
                     else if (selectedItem.StatName == "방어력")
+                    {
                         gameLogic.def -= selectedItem.Stat;
+                        
+                    }
 
                     Console.WriteLine($"{selectedItem.ItemName}을(를) 해제했습니다.");
                 }
@@ -181,6 +193,8 @@ namespace TextRPG_SJ__
             {
                 Console.WriteLine("잘못된 입력입니다.");
             }
+            int totalAtk = gameLogic.atk;
+            int totalDef = gameLogic.def;
         }
 
         public void IntoStore()
