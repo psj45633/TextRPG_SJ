@@ -1,0 +1,14 @@
+C:\coding\C#\TextRPG_SJ__\TextRPG_SJ__\bin\Debug\net8.0\TextRPG_SJ__.exe
+C:\coding\C#\TextRPG_SJ__\TextRPG_SJ__\bin\Debug\net8.0\TextRPG_SJ__.deps.json
+C:\coding\C#\TextRPG_SJ__\TextRPG_SJ__\bin\Debug\net8.0\TextRPG_SJ__.runtimeconfig.json
+C:\coding\C#\TextRPG_SJ__\TextRPG_SJ__\bin\Debug\net8.0\TextRPG_SJ__.dll
+C:\coding\C#\TextRPG_SJ__\TextRPG_SJ__\bin\Debug\net8.0\TextRPG_SJ__.pdb
+C:\coding\C#\TextRPG_SJ__\TextRPG_SJ__\obj\Debug\net8.0\TextRPG_SJ__.GeneratedMSBuildEditorConfig.editorconfig
+C:\coding\C#\TextRPG_SJ__\TextRPG_SJ__\obj\Debug\net8.0\TextRPG_SJ__.AssemblyInfoInputs.cache
+C:\coding\C#\TextRPG_SJ__\TextRPG_SJ__\obj\Debug\net8.0\TextRPG_SJ__.AssemblyInfo.cs
+C:\coding\C#\TextRPG_SJ__\TextRPG_SJ__\obj\Debug\net8.0\TextRPG_SJ__.csproj.CoreCompileInputs.cache
+C:\coding\C#\TextRPG_SJ__\TextRPG_SJ__\obj\Debug\net8.0\TextRPG_SJ__.dll
+C:\coding\C#\TextRPG_SJ__\TextRPG_SJ__\obj\Debug\net8.0\refint\TextRPG_SJ__.dll
+C:\coding\C#\TextRPG_SJ__\TextRPG_SJ__\obj\Debug\net8.0\TextRPG_SJ__.pdb
+C:\coding\C#\TextRPG_SJ__\TextRPG_SJ__\obj\Debug\net8.0\TextRPG_SJ__.genruntimeconfig.cache
+C:\coding\C#\TextRPG_SJ__\TextRPG_SJ__\obj\Debug\net8.0\ref\TextRPG_SJ__.dll
