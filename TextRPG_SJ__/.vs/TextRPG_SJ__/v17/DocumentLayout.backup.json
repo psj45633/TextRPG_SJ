@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\coding\\C#\\TextRPG_SJ__\\",
+  "WorkspaceRootPath": "C:\\Users\\psj45\\Desktop\\GitHub\\TextRPG_SJ\\TextRPG_SJ__\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0EE2F53B-FA20-4F2A-AD95-925543C0C647}|TextRPG_SJ__\\TextRPG_SJ__.csproj|c:\\coding\\c#\\textrpg_sj__\\textrpg_sj__\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0EE2F53B-FA20-4F2A-AD95-925543C0C647}|TextRPG_SJ__\\TextRPG_SJ__.csproj|c:\\users\\psj45\\desktop\\github\\textrpg_sj\\textrpg_sj__\\textrpg_sj__\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0EE2F53B-FA20-4F2A-AD95-925543C0C647}|TextRPG_SJ__\\TextRPG_SJ__.csproj|solutionrelative:textrpg_sj__\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -20,11 +20,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\coding\\C#\\TextRPG_SJ__\\TextRPG_SJ__\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\psj45\\Desktop\\GitHub\\TextRPG_SJ\\TextRPG_SJ__\\TextRPG_SJ__\\Program.cs",
               "RelativeDocumentMoniker": "TextRPG_SJ__\\Program.cs",
-              "ToolTip": "C:\\coding\\C#\\TextRPG_SJ__\\TextRPG_SJ__\\Program.cs",
-              "RelativeToolTip": "TextRPG_SJ__\\Program.cs",
-              "ViewState": "AgIAAI8AAAAAAAAAAAAAwL8AAAAfAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\psj45\\Desktop\\GitHub\\TextRPG_SJ\\TextRPG_SJ__\\TextRPG_SJ__\\Program.cs*",
+              "RelativeToolTip": "TextRPG_SJ__\\Program.cs*",
+              "ViewState": "AgIAABoAAAAAAAAAAAAAwCwAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-17T05:12:15.396Z",
               "EditorCaption": ""

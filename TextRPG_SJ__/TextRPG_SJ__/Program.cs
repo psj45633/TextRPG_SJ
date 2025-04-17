@@ -31,6 +31,7 @@ namespace TextRPG_SJ__
         public int gold = 1500;
 
         ItemManager itemManager;
+        Item item;
 
         public GameLogic()
         {
@@ -41,10 +42,11 @@ namespace TextRPG_SJ__
         public void StartGame()
         {
 
-
+            Item.AddListItem();
             Console.WriteLine("오류 21개 났조에 오신 여려분들 환영합니다.\n이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.");
             Console.WriteLine();
             Init();
+            
 
         }
 
@@ -127,8 +129,9 @@ namespace TextRPG_SJ__
 
         public void IntoStore()
         {
+            
             Console.WriteLine($"상점\n필요한 아이템을 얻을 수 있는 상점입니다.\n\n[보유 골드] G\n{gameLogic.gold}\n\n[아이템 목록]");
-            foreach (var item in item.items) ///////////////////////////////////////////// 예외발생
+            foreach (var item in Item.items) // 예외발생 - List<Item>을 static으로 해줘서 해결
             {
                 Console.WriteLine($"- {item.ItemName} | {item.StatName} +{item.Stat} | {item.Info} | {(item.IsBuy ? "구매완료" : $"{item.BuyGold} G")}");
             }
@@ -149,10 +152,10 @@ namespace TextRPG_SJ__
         public void IntoBuy()
         {
 
-            item.AddListItem();
+            
             Console.WriteLine($"상점 - 아이템 구매\n필요한 아이템을 얻을 수 있는 상점입니다.\n\n[보유 골드] G\n{gameLogic.gold}\n\n[아이템 목록]");
             int idx = 1;
-            foreach (var item in item.items)
+            foreach (var item in Item.items)
             {
                 Console.WriteLine($"- {idx} {item.ItemName} | {item.StatName} +{item.Stat} | {item.Info} | {(item.IsBuy ? "구매완료" : $"{item.BuyGold} G")}"); idx++;
             }
@@ -174,7 +177,7 @@ namespace TextRPG_SJ__
             
             if (itemindex == 1)
             {
-
+                
 
 
                 Console.WriteLine("구매가 완료되었습니다.");
@@ -205,8 +208,8 @@ namespace TextRPG_SJ__
             IsBuy = isBuy;
         }
 
-        public List<Item> items = new List<Item>();
-        public void AddListItem()
+        public static List<Item> items = new List<Item>();
+        public static void AddListItem()
         {
             items.Add(new Item("수련자 갑옷", "방어력", 5, "수련에 도움을 주는 갑옷입니다.", 1000, false));
             items.Add(new Item("무쇠갑옷", "방어력", 9, "무쇠로 만들어져 튼튼한 갑옷입니다.", 2000, false));
