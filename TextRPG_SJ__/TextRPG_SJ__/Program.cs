@@ -1,17 +1,12 @@
 ﻿
 using static System.Formats.Asn1.AsnWriter;
 using System.Numerics;
+using System.ComponentModel;
 
 namespace TextRPG_SJ__
 {
     internal class Program
     {
-        // 1. 게임시작 화면
-        // 2. 상태 보기
-        // 3. 인벤토리
-        // 4. 장착관리
-        // 5. 상점
-        // 6. 아이템구매
         static void Main(string[] args)
         {
             GameLogic gameLogic = new GameLogic();
@@ -22,7 +17,6 @@ namespace TextRPG_SJ__
     class GameLogic
     {
         bool isPlaying = true;
-
         public int lv = 1;
         string job = "전사";
         int baseAtk = 10;
@@ -31,28 +25,19 @@ namespace TextRPG_SJ__
         public int def = 5;
         public int hp = 100;
         public int gold = 50000;
-        
 
         ItemManager itemManager;
-        Item item;
-
         
-
-
 
         public GameLogic()
         {
             itemManager = new ItemManager(this);
         }
 
-
         public void StartGame()
         {
-
             Item.AddListItem();
-
             Console.WriteLine("오류 21개 났조에 오신 여려분들 환영합니다.\n이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.\n");
-
             Init();
         }
 
@@ -60,7 +45,7 @@ namespace TextRPG_SJ__
         {
             while (isPlaying)
             {
-                Console.Write("1. 상태 보기\n2. 인벤토리\n3. 상점\n\n원하시는 행동을 입력해주세요.\n>>");
+                Console.Write("1. 상태 보기\n2. 인벤토리\n3. 상점\n4. 던전 입장\n5. 휴식하기\n\n원하시는 행동을 입력해주세요.\n>>");
 
                 int select = int.Parse(Console.ReadLine());
                 if (select == 1) // 1. 상태 보기
@@ -75,12 +60,66 @@ namespace TextRPG_SJ__
                 {
                     itemManager.IntoStore();
                 }
+                else if(select == 4)
+                {
+                    IntoDungeon();
+                }
+
+                else if(select == 5)
+                {
+                    Rest();
+                }
                 else
                 {
                     Console.WriteLine("잘못된 입력입니다.");
                 }
             }
 
+        }
+
+        private void IntoDungeon()
+        {
+            bool isClear = false;
+            Random random = new Random();
+            float successRate = random.Next(1,101)/100;
+
+            Console.WriteLine($"던전입장\n이곳에서 던전으로 들어가기 전 활동을 할 수 있습니다.\n( 공격력 : {atk} | 방어력 : {def} )\n");
+            Console.WriteLine("1. Easy \t| 방어력 5 이상 권장\n2. Normal\t| 방어력 11 이상 권장\n3. Hard \t| 방어력 17 이상 권장\n0. 나가기\n");
+            int select = int.Parse(Console.ReadLine());
+            if (select == 1) // Easy 입장
+            {
+
+            }
+
+        }
+
+        private void Rest()
+        {
+
+            Console.WriteLine($"휴식하기\n500 G를 내면 체력을 회복할 수 있습니다. (보유 골드 : {gold} G\n\n1. 휴식하기\n0. 나가기\n");
+            Console.Write("원하시는 행동을 입력해주세요\n>>");
+            int select = int.Parse(Console.ReadLine());
+
+            if (select == 1 && gold >= 500)
+            {
+                gold -= 500;
+                hp = 100;
+                Console.WriteLine("체력이 회복 되었습니다.");
+            }
+            else if(select == 1 && gold < 500)
+            {
+                Console.WriteLine("돈이 부족합니다.");
+                Rest();
+            }
+            else if(select == 0)
+            {
+                Init();
+            }
+            else
+            {
+                Console.WriteLine("잘못된 입력입니다.");
+                Rest();
+            }
         }
 
         private void PlayerStat()
@@ -110,11 +149,9 @@ namespace TextRPG_SJ__
         }
 
         public List<Item> myItem = new List<Item>();
-        Item item;
         
         public void MyItemInfo()
         {
-
             Console.WriteLine("인벤토리\n보유 중인 아이템을 관리할 수 있습니다.\n\n[아이템 목록]");
 
             if (myItem.Count > 0)
@@ -139,6 +176,11 @@ namespace TextRPG_SJ__
             else if (select == 2)
             {
 
+            }
+            else
+            {
+                Console.WriteLine("잘못된 입력입니다.");
+                MyItemInfo();
             }
         }
 
@@ -165,6 +207,7 @@ namespace TextRPG_SJ__
 
                     if (selectedItem.StatName == "공격력")
                         gameLogic.atk += selectedItem.Stat;
+
                     else if (selectedItem.StatName == "방어력")
                         gameLogic.def += selectedItem.Stat;
 
@@ -175,15 +218,10 @@ namespace TextRPG_SJ__
                     selectedItem.IsEquip = false;
 
                     if (selectedItem.StatName == "공격력")
-                    {
                         gameLogic.atk -= selectedItem.Stat;
-                        
-                    }
+
                     else if (selectedItem.StatName == "방어력")
-                    {
                         gameLogic.def -= selectedItem.Stat;
-                        
-                    }
 
                     Console.WriteLine($"{selectedItem.ItemName}을(를) 해제했습니다.");
                 }
@@ -193,8 +231,6 @@ namespace TextRPG_SJ__
             {
                 Console.WriteLine("잘못된 입력입니다.");
             }
-            int totalAtk = gameLogic.atk;
-            int totalDef = gameLogic.def;
         }
 
         public void IntoStore()
@@ -203,7 +239,7 @@ namespace TextRPG_SJ__
             Console.WriteLine($"상점\n필요한 아이템을 얻을 수 있는 상점입니다.\n\n[보유 골드] G\n{gameLogic.gold}\n\n[아이템 목록]");
             foreach (var item in Item.items) // 예외발생 - List<Item>을 static으로 해줘서 해결
             {
-                Console.WriteLine($"- {item.ItemName} | {item.StatName} +{item.Stat} | {item.Info} | {(item.IsBuy ? "구매완료" : $"{item.BuyGold} G")}");
+                Console.WriteLine($"- {item.ItemName} | {item.StatName} +{item.Stat} | {item.Info} | {(item.IsBuy ? "[구매완료]" : $"{item.BuyGold} G")}");
             }
             Console.WriteLine("\n1. 아이템 구매\n0. 나가기");
             int select = int.Parse(Console.ReadLine());
@@ -215,35 +251,36 @@ namespace TextRPG_SJ__
             {
                 IntoBuy();
             }
-
-
+            else
+            {
+                Console.WriteLine("잘못된 입력입니다.");
+                IntoStore();
+            }
         }
 
         public void IntoBuy()
         {
-
-
             Console.WriteLine($"상점 - 아이템 구매\n필요한 아이템을 얻을 수 있는 상점입니다.\n\n[보유 골드] G\n{gameLogic.gold}\n\n[아이템 목록]");
             int idx = 1;
             foreach (var item in Item.items)
             {
-                Console.WriteLine($"- {idx} {item.ItemName} | {item.StatName} +{item.Stat} | {item.Info} | {(item.IsBuy ? "구매완료" : $"{item.BuyGold} G")}"); idx++;
+                Console.WriteLine($"- {idx} {item.ItemName} | {item.StatName} +{item.Stat} | {item.Info} | {(item.IsBuy ? "[구매완료]" : $"{item.BuyGold} G")}"); idx++;
             }
             Console.Write("\n0. 나가기\n\n원하시는 행동을 입력해주세요.\n>>");
             int select = int.Parse(Console.ReadLine());
             switch (select)
             {
-                case 0:
-                    IntoStore(); break;
+                case 0: IntoStore(); break;
                 case 1: BuyItem(1); break;
                 case 2: BuyItem(2); break;
                 case 3: BuyItem(3); break;
                 case 4: BuyItem(4); break;
                 case 5: BuyItem(5); break;
                 case 6: BuyItem(6); break;
-
-
-
+                default:
+                    Console.WriteLine("잘못된 입력입니다.");
+                    IntoBuy();
+                    break;
             }
         }
 
@@ -274,23 +311,9 @@ namespace TextRPG_SJ__
             {
                 Console.WriteLine("잘못된 입력입니다.");
             }
-
             IntoBuy();
-            //if (itemindex > 0 && itemindex <= 6)
-            //{
-            //    myItem.Add(Item.items[itemindex - 1]);
-            //    item.IsBuy = true;
-            //    gameLogic.gold -= Item.items[itemindex - 1].BuyGold;
-
-            //    Console.WriteLine($"{myItem[itemindex - 1].ItemName}구매가 완료되었습니다.");
-            //}
-            //IntoBuy();
         }
-
-
-
     }
-
 
     class Item
     {
