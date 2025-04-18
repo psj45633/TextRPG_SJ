@@ -27,7 +27,7 @@ namespace TextRPG_SJ__
         public int gold = 50000;
 
         ItemManager itemManager;
-        
+
 
         public GameLogic()
         {
@@ -60,12 +60,12 @@ namespace TextRPG_SJ__
                 {
                     itemManager.IntoStore();
                 }
-                else if(select == 4)
+                else if (select == 4)
                 {
                     IntoDungeon();
                 }
 
-                else if(select == 5)
+                else if (select == 5)
                 {
                     Rest();
                 }
@@ -80,15 +80,206 @@ namespace TextRPG_SJ__
         private void IntoDungeon()
         {
             bool isClear = false;
+            int easyDef = 5;
+            int normalDef = 11;
+            int hardDef = 17;
+            int easyReward = 1000;
+            int normalReward = 1700;
+            int hardReward = 2500;
+            
+
             Random random = new Random();
-            float successRate = random.Next(1,101)/100;
+            int successRate = random.Next(1, 101);
+            int damage = random.Next(20,35);
+            int rewardRate = random.Next(1, 3);
+
+            int afterHp;
+            int afterGold;
+            
 
             Console.WriteLine($"던전입장\n이곳에서 던전으로 들어가기 전 활동을 할 수 있습니다.\n( 공격력 : {atk} | 방어력 : {def} )\n");
-            Console.WriteLine("1. Easy \t| 방어력 5 이상 권장\n2. Normal\t| 방어력 11 이상 권장\n3. Hard \t| 방어력 17 이상 권장\n0. 나가기\n");
+            Console.WriteLine($"1. Easy \t| 방어력 {easyDef} 이상 권장\n2. Normal\t| 방어력 {normalDef} 이상 권장\n3. Hard \t| 방어력 {hardDef} 이상 권장\n0. 나가기\n");
             int select = int.Parse(Console.ReadLine());
             if (select == 1) // Easy 입장
             {
+                Console.WriteLine("입장 하시겠습니까?\n1. 예\n2. 아니오");
+                int select2 = int.Parse(Console.ReadLine());
+                if (select2 == 1)
+                {
+                    if (def > easyDef || def <= easyDef && successRate > 40)
+                    {
+                        afterHp = hp - damage - (easyDef - def);
+                        afterGold = gold + easyReward * (1 + (atk * rewardRate) / 100);
+                        Console.WriteLine($"던전 클리어\n축하합니다!!\nEasy를 클리어 하였습니다.\n\n[탐험 결과]\n체력 {hp} -> {afterHp}");
+                        Console.WriteLine($"Gold {gold} -> {afterGold} G\n\n0. 나가기\n");
+                        hp = afterHp;
+                        gold = afterGold;
+                        
 
+                        while (true)
+                        {
+                            Console.Write("원하시는 행동을 입력해주세요.\n>> ");
+                            int select3 = int.Parse(Console.ReadLine());
+                            if (select3 == 0)
+                            {
+                                IntoDungeon();
+                            }
+                            else
+                            {
+                                Console.WriteLine("잘못된 입력입니다.");
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        afterHp = hp / 2;
+                        Console.WriteLine($"실패\n던전 도전에 실패하였습니다...\n\n[탐험 결과]\n체력 {hp} -> {afterHp}\n\n0. 나가기\n");
+
+                        hp = afterHp;
+                        while (true)
+                        {
+                            Console.Write("원하시는 행동을 입력해주세요.\n>> ");
+                            int select3 = int.Parse(Console.ReadLine());
+                            if (select3 == 0)
+                            {
+                                IntoDungeon();
+                            }
+                            else
+                            {
+                                Console.WriteLine("잘못된 입력입니다.");
+                            }
+                        }
+
+                    }
+                }
+                else
+                {
+                    IntoDungeon();
+                }
+            } // Easy 입장
+            else if (select == 2) // Normal 입장
+            {
+                Console.WriteLine("입장 하시겠습니까?\n1. 예\n2. 아니오");
+                int select2 = int.Parse(Console.ReadLine());
+                if (select2 == 1)
+                {
+                    if (def > normalDef || def <= normalDef && successRate > 40)
+                    {
+                        afterHp = hp - damage - (normalDef - def);
+                        afterGold = gold + normalReward * (1 + (atk * rewardRate) / 100);
+                        Console.WriteLine($"던전 클리어\n축하합니다!!\nNormal을 클리어 하였습니다.\n\n[탐험 결과]\n체력 {hp} -> {afterHp}");
+                        Console.WriteLine($"Gold {gold} -> {afterGold} G\n\n0. 나가기\n");
+                        hp = afterHp;
+                        gold = afterGold;
+                        
+
+                        while (true)
+                        {
+                            Console.Write("원하시는 행동을 입력해주세요.\n>> ");
+                            int select3 = int.Parse(Console.ReadLine());
+                            if (select3 == 0)
+                            {
+                                IntoDungeon();
+                            }
+                            else
+                            {
+                                Console.WriteLine("잘못된 입력입니다.");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        afterHp = hp / 2;
+                        Console.WriteLine($"실패\n던전 도전에 실패하였습니다...\n\n[탐험 결과]\n체력 {hp} -> {afterHp}\n\n0. 나가기\n");
+
+                        hp = afterHp;
+                        while (true)
+                        {
+                            Console.Write("원하시는 행동을 입력해주세요.\n>> ");
+                            int select3 = int.Parse(Console.ReadLine());
+                            if (select3 == 0)
+                            {
+                                IntoDungeon();
+                            }
+                            else
+                            {
+                                Console.WriteLine("잘못된 입력입니다.");
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    IntoDungeon();
+                }
+            } // Normal 입장
+            else if (select == 3) // Hard 입장
+            {
+                Console.WriteLine("입장 하시겠습니까?\n1. 예\n2. 아니오");
+                int select2 = int.Parse(Console.ReadLine());
+                if (select2 == 1)
+                {
+                    if (def > hardDef || def <= hardDef && successRate > 40)
+                    {
+                        afterHp = hp - damage - (hardDef - def);
+                        afterGold = gold + hardReward * (1 + (atk * rewardRate) / 100);
+                        Console.WriteLine($"던전 클리어\n축하합니다!!\nHard를 클리어 하였습니다.\n\n[탐험 결과]\n체력 {hp} -> {afterHp}");
+                        Console.WriteLine($"Gold {gold} -> {afterGold} G\n\n0. 나가기\n");
+                        hp = afterHp;
+                        gold = afterGold;
+                        
+
+                        while (true)
+                        {
+                            Console.Write("원하시는 행동을 입력해주세요.\n>> ");
+                            int select3 = int.Parse(Console.ReadLine());
+                            if (select3 == 0)
+                            {
+                                IntoDungeon();
+                            }
+                            else
+                            {
+                                Console.WriteLine("잘못된 입력입니다.");
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        afterHp = hp / 2;
+                        Console.WriteLine($"실패\n던전 도전에 실패하였습니다...\n\n[탐험 결과]\n체력 {hp} -> {afterHp}\n\n0. 나가기\n");
+
+                        hp = afterHp;
+                        while (true)
+                        {
+                            Console.Write("원하시는 행동을 입력해주세요.\n>> ");
+                            int select3 = int.Parse(Console.ReadLine());
+                            if (select3 == 0)
+                            {
+                                IntoDungeon();
+                            }
+                            else
+                            {
+                                Console.WriteLine("잘못된 입력입니다.");
+                            }
+                        }
+
+                    }
+                }
+                else
+                {
+                    IntoDungeon();
+                }
+            } // Hard 입장
+            else if (select ==0)
+            {
+                Init();
+            }
+            else
+            {
+                Console.WriteLine("잘못된 입력입니다.");
+                IntoDungeon();
             }
 
         }
@@ -106,12 +297,12 @@ namespace TextRPG_SJ__
                 hp = 100;
                 Console.WriteLine("체력이 회복 되었습니다.");
             }
-            else if(select == 1 && gold < 500)
+            else if (select == 1 && gold < 500)
             {
                 Console.WriteLine("돈이 부족합니다.");
                 Rest();
             }
-            else if(select == 0)
+            else if (select == 0)
             {
                 Init();
             }
@@ -125,7 +316,7 @@ namespace TextRPG_SJ__
         private void PlayerStat()
         {
             Console.WriteLine("상태 보기\n캐릭터의 정보가 표시됩니다.\n");
-            Console.WriteLine($"Lv. {lv.ToString("D2")}\nChad ( {job} )\n공격력 : {atk} (+{atk-baseAtk})\n방어력 : {def} (+{def-baseDef})\n체력 : {hp}\nGold : {gold} G\n");
+            Console.WriteLine($"Lv. {lv.ToString("D2")}\nChad ( {job} )\n공격력 : {atk} (+{atk - baseAtk})\n방어력 : {def} (+{def - baseDef})\n체력 : {hp}\nGold : {gold} G\n");
             Console.Write("0. 나가기\n\n원하시는 행동을 입력해주세요.\n>>");
             int select = int.Parse(Console.ReadLine());
             if (select == 0)
@@ -149,7 +340,7 @@ namespace TextRPG_SJ__
         }
 
         public List<Item> myItem = new List<Item>();
-        
+
         public void MyItemInfo()
         {
             Console.WriteLine("인벤토리\n보유 중인 아이템을 관리할 수 있습니다.\n\n[아이템 목록]");
@@ -277,6 +468,8 @@ namespace TextRPG_SJ__
                 case 4: BuyItem(4); break;
                 case 5: BuyItem(5); break;
                 case 6: BuyItem(6); break;
+                case 7: BuyItem(7); break;
+                case 8: BuyItem(8); break;
                 default:
                     Console.WriteLine("잘못된 입력입니다.");
                     IntoBuy();
@@ -342,9 +535,11 @@ namespace TextRPG_SJ__
             items.Add(new Item(false, "수련자 갑옷", "방어력", 5, "수련에 도움을 주는 갑옷입니다.", 1000, false));
             items.Add(new Item(false, "무쇠갑옷", "방어력", 9, "무쇠로 만들어져 튼튼한 갑옷입니다.", 2000, false));
             items.Add(new Item(false, "스파르타의 갑옷", "방어력", 15, "스파르타의 전사들이 사용했다는 전설의 갑옷입니다.", 3500, false));
+            items.Add(new Item(false, "나영웅의 갑옷", "방어력", 35, "스파르타의 전사 나영웅이 사용했다는 전설의 갑옷입니다.", 15000, false));
             items.Add(new Item(false, "낡은 검", "공격력", 2, "쉽게 볼 수 있는 낡은 검입니다.", 600, false));
             items.Add(new Item(false, "청동 도끼", "공격력", 5, "어디선가 사용됐던거 같은 입니다.", 1500, false));
             items.Add(new Item(false, "스파르타의 창", "공격력", 7, "스파르타의 전사들이 사용했다는 전설의 창입니다.", 2500, false));
+            items.Add(new Item(false, "박찬우의 창", "공격력", 20, "스파르타의 전사 박찬우가 사용했다는 전설의 창입니다.", 15000, false));
         }
     }
 }
