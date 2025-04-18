@@ -110,6 +110,7 @@ namespace TextRPG_SJ__
                     {
                         afterHp = hp - damage - (easyDef - def);
                         afterGold = gold + easyReward * (1 + (atk * rewardRate) / 100);
+                        if (afterHp > 100) afterHp = 100;
                         Console.WriteLine($"던전 클리어\n축하합니다!!\nEasy를 클리어 하였습니다.\n\n[탐험 결과]\n체력 {hp} -> {afterHp}");
                         Console.WriteLine($"Gold {gold} -> {afterGold} G\n\n0. 나가기\n");
                         hp = afterHp;
@@ -168,6 +169,7 @@ namespace TextRPG_SJ__
                     {
                         afterHp = hp - damage - (normalDef - def);
                         afterGold = gold + normalReward * (1 + (atk * rewardRate) / 100);
+                        if (afterHp > 100) afterHp = 100;
                         Console.WriteLine($"던전 클리어\n축하합니다!!\nNormal을 클리어 하였습니다.\n\n[탐험 결과]\n체력 {hp} -> {afterHp}");
                         Console.WriteLine($"Gold {gold} -> {afterGold} G\n\n0. 나가기\n");
                         hp = afterHp;
@@ -224,10 +226,12 @@ namespace TextRPG_SJ__
                     {
                         afterHp = hp - damage - (hardDef - def);
                         afterGold = gold + hardReward * (1 + (atk * rewardRate) / 100);
+                        if (afterHp > 100) afterHp = 100;
                         Console.WriteLine($"던전 클리어\n축하합니다!!\nHard를 클리어 하였습니다.\n\n[탐험 결과]\n체력 {hp} -> {afterHp}");
                         Console.WriteLine($"Gold {gold} -> {afterGold} G\n\n0. 나가기\n");
                         hp = afterHp;
                         gold = afterGold;
+                        
                         
 
                         while (true)
